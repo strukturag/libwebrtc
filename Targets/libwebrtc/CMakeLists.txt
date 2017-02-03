@@ -25,22 +25,24 @@ if (WIN32)
     list(APPEND LIBWEBRTC_OBJ_FILES ${LIBWEBRTC_O_FILES})
 endif()
 
-file(GLOB_RECURSE LIBWEBRTC_OBJ_EXCLUDED
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/yasm/gen*/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/yasm/re2c/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/yasm/yasm/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/protobuf/protoc/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/protobuf/protobuf_full/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/webrtc/examples/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/webrtc/tools/*.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/webrtc/modules/video_capture/video_capture/video_capture_external.${LIBWEBRTC_OBJ_EXT}
-     ${LIBWEBRTC_OUTPUT_DIR}/obj/webrtc/modules/video_capture/video_capture/device_info_external.${LIBWEBRTC_OBJ_EXT})
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX test)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX unittests)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX third_party/yasm/gen)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX third_party/yasm/re2c)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX third_party/yasm/re2c)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX third_party/protobuf/protoc)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX third_party/protobuf/protobuf_full)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX webrtc/examples)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX webrtc/tools)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX webrtc/modules/video_capture/video_capture/video_capture_external)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX webrtc/modules/video_capture/video_capture/device_info_external)
+list(FILTER LIBWEBRTC_OBJ_FILES EXCLUDE REGEX webrtc/modules/video_capture/video_capture/device_info_external)
 
-list(LENGTH LIBWEBRTC_OBJ_EXCLUDED LIBWEBRTC_OBJ_EXCLUDED_LEN)
-
-if (${LIBWEBRTC_OBJ_EXCLUDED_LEN} GREATER "0")
-  list(REMOVE_ITEM LIBWEBRTC_OBJ_FILES ${LIBWEBRTC_OBJ_EXCLUDED})
-endif ()
+#add fakeaudio device 
+file(GLOB_RECURSE LIBWEBRTC_TEST_COMMON_FILES 
+      "${LIBWEBRTC_OUTPUT_DIR}/obj/webrtc/test/test_common/*.${LIBWEBRTC_OBJ_EXT}"
+      "${LIBWEBRTC_OUTPUT_DIR}/obj/testing/gtest/gtest*.${LIBWEBRTC_OBJ_EXT}")
+list(APPEND LIBWEBRTC_OBJ_FILES ${LIBWEBRTC_TEST_COMMON_FILES})
 
 add_library(webrtc STATIC ${LIBWEBRTC_OBJ_FILES})
 
