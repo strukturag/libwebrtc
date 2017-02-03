@@ -50,17 +50,15 @@ set_source_files_properties(${LIBWEBRTC_OBJ_FILES} PROPERTIES
 
 set_target_properties(webrtc PROPERTIES
                       LINKER_LANGUAGE C
-                      LIBRARY_OUTPUT_DIRECTORY ${LIBWEBRTC_OUTPUT_DIR})
+                      LIBRARY_OUTPUT_DIRECTORY ${LIBWEBRTC_OUTPUT_DIR}
+                      PREFIX lib)
 
 #
 # Install headers
 #
 install(DIRECTORY ${LIBWEBRTC_INCLUDE_DIR}
-        DESTINATION "include/libwebrtc"
+        DESTINATION "include"
         FILES_MATCHING PATTERN "*.h")
-
-install(FILES ${CMAKE_INSTALL_PREFIX}/libwebrtc.h
-        DESTINATION "include/libwebrtc")
 
 #
 # Install library
