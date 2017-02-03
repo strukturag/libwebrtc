@@ -28,6 +28,9 @@ if (${_OBJ_EXCLUDED_LEN} GREATER "0")
   list(REMOVE_ITEM _OBJ_FILES ${_OBJ_EXCLUDED})
 endif ()
 
+list(FILTER _OBJ_FILES EXCLUDE REGEX test)
+list(FILTER _OBJ_FILES EXCLUDE REGEX unittests)
+
 add_library(webrtc ${LIBRARY_TYPE} ${_OBJ_FILES})
 
 set_source_files_properties(${_OBJ_FILES} PROPERTIES
