@@ -104,17 +104,13 @@ endif (TARGET_OS STREQUAL "android")
 #
 # Generate build files
 #
-set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\")
+set(_GEN_ARGS use_gold=false rtc_include_tests=true target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\")
 
 if (NOT CMAKE_BUILD_TYPE MATCHES DEBUG)
   set(_GEN_ARGS ${_GEN_ARGS} is_debug=false)
 elseif (NOT CMAKE_BUILD_TYPE MATCHES DEBUG)
   set(_GEN_ARGS ${_GEN_ARGS} is_debug=true)
 endif (NOT CMAKE_BUILD_TYPE MATCHES DEBUG)
-
-if (NOT BUILD_TESTS)
-  set(_GEN_ARGS ${_GEN_ARGS} rtc_include_tests=false)
-endif (NOT BUILD_TESTS)
 
 if (WIN32)
   set(_GEN_ARGS ${_GEN_ARGS})
