@@ -18,6 +18,13 @@ endif ()
 file(GLOB_RECURSE LIBWEBRTC_OBJ_FILES
      ${LIBWEBRTC_OUTPUT_DIR}/obj/*.${LIBWEBRTC_OBJ_EXT})
 
+# capture the assembly compile outputs of libvpx_yasm.lib and other third_party libs
+if (WIN32)
+    file(GLOB_RECURSE LIBWEBRTC_O_FILES
+         ${LIBWEBRTC_OUTPUT_DIR}/obj/*.o)
+    list(APPEND LIBWEBRTC_OBJ_FILES ${LIBWEBRTC_O_FILES})
+endif()
+
 file(GLOB_RECURSE LIBWEBRTC_OBJ_EXCLUDED
      ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/yasm/gen*/*.${LIBWEBRTC_OBJ_EXT}
      ${LIBWEBRTC_OUTPUT_DIR}/obj/third_party/yasm/re2c/*.${LIBWEBRTC_OBJ_EXT}
