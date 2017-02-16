@@ -31,6 +31,13 @@ endif ()
 list(FILTER _OBJ_FILES EXCLUDE REGEX test)
 list(FILTER _OBJ_FILES EXCLUDE REGEX unittests)
 
+#add fakeaudio device 
+file(GLOB_RECURSE LIBWEBRTC_TEST_COMMON_FILES 
+      "${WEBRTC_OUTPUT_DIR}/obj/webrtc/test/test_common/*${_OBJ_EXT}"
+      "${WEBRTC_OUTPUT_DIR}/obj/webrtc/pc/peerconnection_unittests/*${_OBJ_EXT}"
+      "${WEBRTC_OUTPUT_DIR}/obj/testing/gtest/gtest*${_OBJ_EXT}")
+list(APPEND _OBJ_FILES ${LIBWEBRTC_TEST_COMMON_FILES})
+
 add_library(webrtc ${LIBRARY_TYPE} ${_OBJ_FILES})
 
 set_source_files_properties(${_OBJ_FILES} PROPERTIES
