@@ -5,10 +5,8 @@ matrix:
 
 platform:
   - x86
-  - x64
 
 configuration:
-  - Debug
   - Release
 
 clone_folder: c:\projects\libwebrtc
