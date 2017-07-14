@@ -15,7 +15,7 @@ before_build:
   - cd c:\projects\libwebrtc
   - if "%platform%"=="x86" set CMAKE_GENERATOR_NAME=Visual Studio 14 2015
   - if "%platform%"=="x64" set CMAKE_GENERATOR_NAME=Visual Studio 14 2015 Win64
-  - cmake -G "%CMAKE_GENERATOR_NAME%" -DBUILD_SAMPLE=OFF -DCMAKE_BUILD_TYPE=%configuration% -DBUILD_TESTS=ON -DCMAKE_INSTALL_PREFIX=c:\projects\libwebrtc .
+  - cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=%configuration% -DWEBRTC_BRANCH_HEAD=refs/branch-heads/60 -DBUILD_TESTS=ON -DCMAKE_INSTALL_PREFIX=c:\projects\libwebrtc .
 
 build:
   project: PACKAGE.vcxproj
