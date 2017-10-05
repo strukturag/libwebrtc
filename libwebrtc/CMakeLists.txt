@@ -19,7 +19,6 @@ file(GLOB_RECURSE _OBJ_EXCLUDED
      ${WEBRTC_OUTPUT_DIR}/obj/third_party/protobuf/protoc/*${_OBJ_EXT}
      ${WEBRTC_OUTPUT_DIR}/obj/third_party/protobuf/protobuf_full/*${_OBJ_EXT}
      ${WEBRTC_OUTPUT_DIR}/obj/webrtc/examples/*${_OBJ_EXT}
-     ${WEBRTC_OUTPUT_DIR}/obj/webrtc/tools/*${_OBJ_EXT}
      ${WEBRTC_OUTPUT_DIR}/obj/webrtc/modules/audio_coding/delay_test/utility${_OBJ_EXT}
      ${WEBRTC_OUTPUT_DIR}/obj/webrtc/modules/modules_tests/utility${_OBJ_EXT}
      ${WEBRTC_OUTPUT_DIR}/obj/webrtc/modules/video_capture/video_capture/video_capture_external${_OBJ_EXT}
@@ -45,6 +44,9 @@ set_target_properties(webrtc PROPERTIES
 # Install headers
 install(DIRECTORY ${WEBRTC_SOURCE_DIR}
         DESTINATION "include"
+        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY "${WEBRTC_SOURCE_DIR}/../third_party/jsoncpp/source/include/"
+        DESTINATION "include/third_party"
         FILES_MATCHING PATTERN "*.h")
 
 #
