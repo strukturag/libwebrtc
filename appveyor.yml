@@ -7,7 +7,7 @@ platform:
   - x86
 
 configuration:
-  - Release
+  - Debug
 
 clone_folder: c:\projects\libwebrtc
 
