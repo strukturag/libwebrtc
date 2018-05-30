@@ -1,6 +1,5 @@
 #
 # Options, flags
-option(BUILD_TESTS "Build test binaries" OFF)
 option(BUILD_SAMPLE "Build sample" OFF)
 set(DEPOT_TOOLS_PATH "" CACHE STRING "Path to your own depot_tools directory")
 set(NINJA_ARGS "" CACHE STRING "Ninja arguments to pass before compiling WebRTC")
