@@ -45,9 +45,6 @@ set_target_properties(webrtc PROPERTIES
 install(DIRECTORY ${WEBRTC_SOURCE_DIR}
         DESTINATION "include"
         FILES_MATCHING PATTERN "*.h")
-install(DIRECTORY "${WEBRTC_SOURCE_DIR}/../third_party/jsoncpp/source/include/"
-        DESTINATION "include/third_party"
-        FILES_MATCHING PATTERN "*.h")
 
 #
 # Install library
