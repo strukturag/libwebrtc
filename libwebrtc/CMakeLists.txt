@@ -40,13 +40,18 @@ set_target_properties(webrtc PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY ${WEBRTC_OUTPUT_DIR}
                       PREFIX lib)
 
-#
+
 # Install headers
 install(DIRECTORY ${WEBRTC_SOURCE_DIR}
         DESTINATION "include"
         FILES_MATCHING PATTERN "*.h")
 
-#
+# Install pdb files
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+  file(GLOB_RECURSE PDB_FILES [${WEBRTC_OUTPUT_DIR} "*.pdb")
+  install(FILES ${PDB_FILES} DESTINATION lib)
+endif()        
+
 # Install library
 install(TARGETS webrtc
         EXPORT LibWebRTCTargets
