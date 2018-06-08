@@ -42,8 +42,24 @@ set_target_properties(webrtc PROPERTIES
 
 
 # Install headers
-install(DIRECTORY "${WEBRTC_SOURCE_DIR}/"
-        DESTINATION "include"
+install(FILES "${WEBRTC_SOURCE_DIR}/common_types.h" DESTINATION "include/webrtc")
+install(FILES "${WEBRTC_SOURCE_DIR}/typedefs.h" DESTINATION "include/webrtc")
+install(DIRECTORY
+          "${WEBRTC_SOURCE_DIR}/api"
+          "${WEBRTC_SOURCE_DIR}/base"
+          "${WEBRTC_SOURCE_DIR}/call"
+          "${WEBRTC_SOURCE_DIR}/common_video"
+          "${WEBRTC_SOURCE_DIR}/logging"
+          "${WEBRTC_SOURCE_DIR}/media"
+          "${WEBRTC_SOURCE_DIR}/modules"
+          "${WEBRTC_SOURCE_DIR}/p2p"
+          "${WEBRTC_SOURCE_DIR}/pc"
+          "${WEBRTC_SOURCE_DIR}/rtc_base"
+          "${WEBRTC_SOURCE_DIR}/system_wrappers"
+        DESTINATION "include/webrtc"
+        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY "${WEBRTC_SOURCE_DIR}/third_party/jsoncpp"
+        DESTINATION "include/webrtc/third_party"
         FILES_MATCHING PATTERN "*.h")
 
 # Install pdb files
