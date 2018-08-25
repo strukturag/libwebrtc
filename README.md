@@ -178,7 +178,7 @@ variable.
 
 ```
 $ cmake -DWEBRTC_REVISION=be22d51 ..
-$ cmake -DWEBRTC_BRANCH_HEAD=refs/branch-heads/57 ..
+$ cmake -DWEBRTC_BRANCH_HEAD=refs/branch-heads/68 ..
 ```
 
 If both variables are set, it will focus on fetching the commit defined inside
