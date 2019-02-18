@@ -144,7 +144,7 @@ libwebrtc_command(
     DEPENDS ${_DEPENDENCIES}
 )
 
-set(_NINJA_COMMAND ninja ${NINJA_ARGS} -C ${_NINJA_BUILD_DIR} pc:peerconnection system_wrappers:field_trial_default system_wrappers:metrics_default jsoncpp)
+set(_NINJA_COMMAND ninja ${NINJA_ARGS} -C ${_NINJA_BUILD_DIR} :webrtc jsoncpp libyuv)
 
 libwebrtc_command(
     NAME webrtc-build

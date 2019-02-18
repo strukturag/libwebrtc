@@ -43,7 +43,6 @@ set_target_properties(webrtc PROPERTIES
 
 # Install headers
 install(FILES "${WEBRTC_SOURCE_DIR}/common_types.h" DESTINATION "include/webrtc")
-install(FILES "${WEBRTC_SOURCE_DIR}/typedefs.h" DESTINATION "include/webrtc")
 install(DIRECTORY
           "${WEBRTC_SOURCE_DIR}/api"
           "${WEBRTC_SOURCE_DIR}/base"
@@ -59,6 +58,10 @@ install(DIRECTORY
         DESTINATION "include/webrtc"
         FILES_MATCHING PATTERN "*.h")
 install(DIRECTORY "${WEBRTC_SOURCE_DIR}/third_party/jsoncpp"
+        DESTINATION "include/webrtc/third_party"
+        FILES_MATCHING PATTERN "*.h")
+
+install(DIRECTORY "${WEBRTC_SOURCE_DIR}/third_party/libyuv"
         DESTINATION "include/webrtc/third_party"
         FILES_MATCHING PATTERN "*.h")
 
