@@ -4,3 +4,4 @@
 *.gclient
 *.gclient_entries
 /cmake-build-debug/
+build
