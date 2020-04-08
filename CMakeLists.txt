@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.3)
-project(libwebrtc)
+project(libwebrtcx)
 
 #
 # Allow the use of IN_LIST operand
 cmake_policy(SET CMP0057 NEW)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-    ${CMAKE_SOURCE_DIR}/CMakeModules)
+    ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules)
 
 find_package(Git REQUIRED)
 
@@ -27,17 +27,17 @@ include(ExternalProject)
 
 if (NOT HAS_OWN_DEPOT_TOOLS)
   if (WIN32)
-    set(GCLIENT_EXECUTABLE ${CMAKE_BINARY_DIR}/depot_tools/src/depot-tools/gclient.bat)
+    set(GCLIENT_EXECUTABLE ${CMAKE_CURRENT_BINARY_DIR}/depot_tools/src/depot-tools/gclient.bat)
   else (WIN32)
-    set(GCLIENT_EXECUTABLE ${CMAKE_BINARY_DIR}/depot_tools/src/depot-tools/gclient)
+    set(GCLIENT_EXECUTABLE ${CMAKE_CURRENT_BINARY_DIR}/depot_tools/src/depot-tools/gclient)
   endif (WIN32)
 
   ExternalProject_Add(
       depot-tools
-
+    
       GIT_REPOSITORY https://chromium.googlesource.com/chromium/tools/depot_tools
 
-      PREFIX ${CMAKE_BINARY_DIR}/depot_tools
+      PREFIX ${CMAKE_CURRENT_BINARY_DIR}/depot_tools
 
       CONFIGURE_COMMAND ""
       UPDATE_COMMAND ""
@@ -47,7 +47,7 @@ if (NOT HAS_OWN_DEPOT_TOOLS)
   )
 
   set(_NEXT_DEPENDS depot-tools)
-  set(DEPOT_TOOLS_PATH ${CMAKE_BINARY_DIR}/depot_tools/src/depot-tools)
+  set(DEPOT_TOOLS_PATH ${CMAKE_CURRENT_BINARY_DIR}/depot_tools/src/depot-tools)
 endif (NOT HAS_OWN_DEPOT_TOOLS)
 
 set(_WEBRTC_CMAKE_ARGS
@@ -58,7 +58,7 @@ set(_WEBRTC_CMAKE_ARGS
     -DHAS_OWN_DEPOT_TOOLS:PATH=${HAS_OWN_DEPOT_TOOLS}
     -DTARGET_CPU=${TARGET_CPU}
     -DTARGET_OS=${TARGET_OS}
-    -DWEBRTC_PARENT_DIR:PATH=${CMAKE_BINARY_DIR}/webrtc)
+    -DWEBRTC_PARENT_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/webrtc)
 
 if (WEBRTC_BRANCH_HEAD)
   set(_WEBRTC_CMAKE_ARGS ${_WEBRTC_CMAKE_ARGS} -DWEBRTC_BRANCH_HEAD=${WEBRTC_BRANCH_HEAD})
@@ -74,14 +74,14 @@ ExternalProject_Add(
     DEPENDS ${_NEXT_DEPENDS}
     GIT_REPOSITORY https://chromium.googlesource.com/external/webrtc
 
-    PREFIX ${CMAKE_BINARY_DIR}/webrtc
-    BINARY_DIR ${CMAKE_BINARY_DIR}/webrtc/build
-    DOWNLOAD_DIR ${CMAKE_BINARY_DIR}/webrtc/src
-    SOURCE_DIR ${CMAKE_BINARY_DIR}/webrtc/src
-    STAMP_DIR ${CMAKE_BINARY_DIR}/webrtc/stamp
-    TMP_DIR ${CMAKE_BINARY_DIR}/webrtc/tmp
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/webrtc
+    BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/webrtc/build
+    DOWNLOAD_DIR ${CMAKE_CURRENT_BINARY_DIR}/webrtc/src
+    SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/webrtc/src
+    STAMP_DIR ${CMAKE_CURRENT_BINARY_DIR}/webrtc/stamp
+    TMP_DIR ${CMAKE_CURRENT_BINARY_DIR}/webrtc/tmp
 
-    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/webrtc/CMakeLists.txt.in ${CMAKE_BINARY_DIR}/webrtc/src/CMakeLists.txt
+    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/webrtc/CMakeLists.txt.in ${CMAKE_CURRENT_BINARY_DIR}/webrtc/src/CMakeLists.txt
     UPDATE_COMMAND ""
     INSTALL_COMMAND ""
 
@@ -98,21 +98,21 @@ else (MSVC OR XCODE)
 endif (MSVC OR XCODE)
 
 ExternalProject_Add(
-    libwebrtc
+    libwebrtcx
     DEPENDS webrtc-src
 
-    INSTALL_DIR ${CMAKE_BINARY_DIR}
-    SOURCE_DIR ${CMAKE_SOURCE_DIR}/libwebrtc
-    BINARY_DIR ${CMAKE_BINARY_DIR}/libwebrtc
+    INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libwebrtc
+    BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/libwebrtc
 
     CMAKE_ARGS
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}
+    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}
     -DCMAKE_MODULE_PATH:PATH=${CMAKE_MODULE_PATH}
-    -DINSTALL_CMAKE_DIR:PATH=${CMAKE_BINARY_DIR}/lib/cmake/LibWebRTC
+    -DINSTALL_CMAKE_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/LibWebRTC
     -DTARGET_OS:STRING=${TARGET_OS}
-    -DWEBRTC_OUTPUT_DIR:PATH=${CMAKE_BINARY_DIR}/webrtc/src/out/${_CONFIG}
-    -DWEBRTC_SOURCE_DIR:PATH=${CMAKE_BINARY_DIR}/webrtc/src
+    -DWEBRTC_OUTPUT_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/webrtc/src/out/${_CONFIG}
+    -DWEBRTC_SOURCE_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/webrtc/src
 )
 
 if (BUILD_SAMPLE)
