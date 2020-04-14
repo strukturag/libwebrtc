@@ -5,3 +5,5 @@
 *.gclient_entries
 /cmake-build-debug/
 build
+_build
+*.gitignore
