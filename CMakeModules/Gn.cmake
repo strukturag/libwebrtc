@@ -1,5 +1,11 @@
 #set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\" is_component_build=false)
-set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\" is_component_build=false rtc_include_tests=false use_debug_fission=false  linux_use_bundled_binutils=false treat_warnings_as_errors=false is_debug=false clang_use_chrome_plugins=false use_custom_libcxx=false)
+
+
+# linux default:
+#set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\" is_component_build=false rtc_include_tests=false use_debug_fission=false  linux_use_bundled_binutils=false treat_warnings_as_errors=false is_debug=false clang_use_chrome_plugins=false use_custom_libcxx=false)
+
+# new windows default:
+set(_GEN_ARGS use_gold=false target_cpu=\\"${TARGET_CPU}\\" target_os=\\"${TARGET_OS}\\" rtc_include_tests=false use_sysroot=false use_debug_fission=false linux_use_bundled_binutils=false treat_warnings_as_errors=false is_debug=false clang_use_chrome_plugins=false use_cxx11 = true)
 
 # FIXME with using `use_sysroot=false` keeps failing, the build has compile errors and later linker errors
 
